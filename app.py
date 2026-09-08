@@ -364,9 +364,14 @@ def handle_reminders(environ: dict, start_response, db_path: Path):
 
 
 def serve_static(path: str, start_response, static_dir: Path):
-    relative_path = "index.html" if path in {"", "/"} else path.lstrip("/")
-    target = (static_dir / relative_path).resolve()
-    if not str(target).startswith(str(static_dir.resolve())) or not target.is_file():
+    asset_name = "index.html" if path in {"", "/"} else path.lstrip("/")
+    allowed_assets = {
+        "index.html": static_dir / "index.html",
+        "app.js": static_dir / "app.js",
+        "styles.css": static_dir / "styles.css",
+    }
+    target = allowed_assets.get(asset_name)
+    if target is None or not target.is_file():
         return text_response(start_response, "404 Not Found", b"Not found", "text/plain; charset=utf-8")
     content_type = {
         ".html": "text/html; charset=utf-8",
