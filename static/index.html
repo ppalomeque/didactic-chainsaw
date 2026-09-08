@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Todo App</h1>
+        <p>Track personal tasks, deadlines, progress, and upcoming reminders.</p>
+      </header>
+
+      <section id="auth-section" class="panel">
+        <div class="auth-grid">
+          <form id="register-form" class="card">
+            <h2>Create account</h2>
+            <label>
+              Username
+              <input name="username" type="text" required />
+            </label>
+            <label>
+              Password
+              <input name="password" type="password" required />
+            </label>
+            <button type="submit">Register</button>
+          </form>
+
+          <form id="login-form" class="card">
+            <h2>Log in</h2>
+            <label>
+              Username
+              <input name="username" type="text" required />
+            </label>
+            <label>
+              Password
+              <input name="password" type="password" required />
+            </label>
+            <button type="submit">Log in</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="app-section" class="panel hidden">
+        <div class="toolbar">
+          <div>
+            <h2 id="welcome-message"></h2>
+            <p id="status-message" aria-live="polite"></p>
+          </div>
+          <button id="logout-button" type="button">Log out</button>
+        </div>
+
+        <div id="reminder-panel" class="card hidden">
+          <h3>Upcoming reminders (next 24 hours)</h3>
+          <ul id="reminder-list"></ul>
+        </div>
+
+        <form id="task-form" class="card">
+          <h3 id="task-form-title">Add task</h3>
+          <input id="task-id" type="hidden" />
+          <label>
+            Description
+            <input id="description" type="text" required />
+          </label>
+          <label>
+            Deadline
+            <input id="deadline" type="datetime-local" required />
+          </label>
+          <div class="actions">
+            <button type="submit" id="save-task-button">Save task</button>
+            <button type="button" id="cancel-edit-button" class="secondary hidden">Cancel edit</button>
+          </div>
+        </form>
+
+        <section class="card controls">
+          <label>
+            Search
+            <input id="search" type="search" placeholder="Find a task" />
+          </label>
+          <label>
+            Status
+            <select id="status-filter">
+              <option value="all">All</option>
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+            </select>
+          </label>
+          <label>
+            Sort
+            <select id="sort-order">
+              <option value="deadline_asc">Deadline (earliest first)</option>
+              <option value="deadline_desc">Deadline (latest first)</option>
+              <option value="status">Completion status</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="card">
+          <h3>Your tasks</h3>
+          <ul id="task-list" class="task-list"></ul>
+          <p id="empty-state" class="hidden">No tasks match the current filters.</p>
+        </section>
+      </section>
+    </main>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
