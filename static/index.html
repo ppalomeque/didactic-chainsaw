@@ -3,19 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todo App</title>
+    <title>eventually!</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <main class="container">
       <header>
-        <h1>Todo App</h1>
+        <h1>eventually!</h1>
         <p>Track personal tasks, deadlines, progress, and upcoming reminders.</p>
       </header>
 
       <section id="auth-section" class="panel">
+        <header>
+          <h2>Welcome!</h2>
+          <p>Log in or create an account to manage your tasks.</p>
+        </header>
+        <div id="auth-toggle" class="auth-toggle">
+          <button id="show-login-button" type="button">Log in</button>
+          <button id="show-register-button" type="button">Create Account</button>
+        </div>
+
+        <p id="auth-message" aria-live="polite"></p>
+
         <div class="auth-grid">
-          <form id="register-form" class="card">
+          <form id="register-form" class="card hidden">
             <h2>Create account</h2>
             <label>
               Username
@@ -25,10 +36,13 @@
               Password
               <input name="password" type="password" required />
             </label>
-            <button type="submit">Register</button>
+            <div class="actions">
+              <button type="submit">Register</button>
+              <button type="button" class="secondary auth-back-button">Back</button>
+            </div>
           </form>
 
-          <form id="login-form" class="card">
+          <form id="login-form" class="card hidden">
             <h2>Log in</h2>
             <label>
               Username
@@ -38,7 +52,10 @@
               Password
               <input name="password" type="password" required />
             </label>
-            <button type="submit">Log in</button>
+            <div class="actions">
+              <button type="submit">Log in</button>
+              <button type="button" class="secondary auth-back-button">Back</button>
+            </div>
           </form>
         </div>
       </section>
@@ -47,10 +64,10 @@
         <div class="toolbar">
           <div>
             <h2 id="welcome-message"></h2>
-            <p id="status-message" aria-live="polite"></p>
           </div>
           <button id="logout-button" type="button">Log out</button>
         </div>
+        <p id="status-message" class="toast hidden" aria-live="polite"></p>
 
         <div id="reminder-panel" class="card hidden">
           <h3>Upcoming reminders (next 24 hours)</h3>
@@ -101,6 +118,11 @@
           <h3>Your tasks</h3>
           <ul id="task-list" class="task-list"></ul>
           <p id="empty-state" class="hidden">No tasks match the current filters.</p>
+          <div id="pagination" class="pagination hidden">
+            <button id="prev-page-button" type="button" class="secondary">Previous</button>
+            <span id="pagination-status"></span>
+            <button id="next-page-button" type="button" class="secondary">Next</button>
+          </div>
         </section>
       </section>
     </main>
